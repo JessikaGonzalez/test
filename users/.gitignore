@@ -1,0 +1,11 @@
+build
+.vscode
+*.DS_Store
+.AppleDouble
+.LSOverride
+._*
+node_modules/
+.npm
+.eslintcache
+*.tgz
+.env

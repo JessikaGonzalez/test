@@ -1,0 +1,18 @@
+.header-container {
+	display: -ms-flex;
+	display: -webkit-flex;
+	display: flex;
+  width: 700px;
+}
+
+.header-container > div {
+	width: 50%;
+	padding-top: 30px;
+  text-align: right;
+  align-items:end;
+}
+
+.header-container > div:first-child {
+	width: 50%;
+  text-align: left;
+}
