@@ -92,7 +92,71 @@ El `import` carga su contenido de manera asíncona, es perteneciente al ES6 stan
 
 ## 2. Ejercicios Prácticos
 
+Instrucciones:
+
+`mkdir ~/test`
+
+`cd ~/test`
+
+`git clone https://github.com/JessikaGonzalez/test.git`
+
+`cd ~/test/users`
+
+`nvm install v20`
+
+`nvm use 20`
+
+`npm install`
+
+`npm run dev`
+
+Open other command line window
+
+`cd ~/test/server-users`
+
+`nvm use 20`
+
+`npm install`
+
+`npm run start`
+
+Now are running both front-end and back-end
 
 
 ## 3. Proyecto Pequeño
 
+Para probar el back end de las tareas en POSTMAN:
+
+GET: `http://localhost:4020/api/tasks`
+
+Allá se encuentran todos los id, por favor, reemplaza el {id} por el id correspondiente
+
+GET: `http://localhost:4020/api/task/{id}`
+
+POST: `http://localhost:4020/api/task/`
+
+con el body:
+```
+{
+    "title": "New Task",
+    "description": "new des",
+    "state": "In Progress"
+}
+```
+
+PUT: `http://localhost:4020/api/task/{id}`
+
+Obtener el id, del New Task y reemplaza el {id} por el id correspondiente
+
+con el body:
+```
+{
+    "title": "Change name Task",
+    "description": "new des",
+    "state": "In Progress"
+}
+```
+
+DELETE: `http://localhost:4020/api/task/{id}`
+
+Obtener el id, del cualquier task y reemplaza el {id} por el id correspondiente

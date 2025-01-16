@@ -10,7 +10,7 @@ router.get('/api/tasks/:id', getTask)
 
 router.post('/api/task/', putTask)
 
-router.put('/api/tasks/:id', updateTask)
+router.put('/api/task/:id', updateTask)
 
 router.delete('/api/task/:id', deleteTask)
 
