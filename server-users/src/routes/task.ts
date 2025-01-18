@@ -4,7 +4,7 @@ import { getAll, getTask, putTask, deleteTask, updateTask } from '../controllers
 
 const router: Router = express.Router();
 
-router.get('/api/tasks/', getAll)
+router.get('/api/tasks/:email', getAll)
 
 router.get('/api/tasks/:id', getTask)
 

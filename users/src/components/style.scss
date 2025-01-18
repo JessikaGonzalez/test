@@ -1,0 +1,6 @@
+TableBody TableRow .row-body {
+  &:hover {
+    background-color: aqua;
+    visibility: hidden;
+  }
+}

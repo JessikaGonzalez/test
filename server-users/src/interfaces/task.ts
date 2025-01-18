@@ -8,6 +8,8 @@ export interface ITask extends IBaseObject {
   title: string;
   description: string;
   state: string;
+  user: string;
+  createdAt: Date;
 }
 
 export interface ITaskDocument extends ITask {

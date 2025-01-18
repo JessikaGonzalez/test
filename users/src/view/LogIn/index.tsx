@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router';
 import {
   Card,
   CardHeader,
@@ -10,7 +9,7 @@ import {
 } from '@mui/material';
 import Cookies from 'js-cookie';
 
-import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
+import { useAppDispatch } from '../../utils/hooks.ts';
 import { logInUser } from '../../controllers/auth'
 import { fetchUser } from '../../actions/user.ts'
 import { emailNotValid } from '../../utils/LogIn'
@@ -20,8 +19,7 @@ const LogIn = () => {
   const [error, setError] = useState('');
   const [email, setEmail] = useState('');
   const [isDisabledLogInButton, setDisableLogInButton] = useState(true);
-  const [shouldRedirect, setShouldRedirect] = useState(false);
-  const { success } = useAppSelector((state: any) => state.logInSlice);
+
 
   const dispatch = useAppDispatch();
 
@@ -46,11 +44,10 @@ const LogIn = () => {
     const user = await logInUser(email);
     if(!user) {
       setData('User not found', true, '')
-      setShouldRedirect(false);
     } else {
       dispatch(fetchUser(email));
       Cookies.set('email', email, { expires: 1 });
-      location.href = '/users';
+      location.href = '/tasks';
     }
   }
 

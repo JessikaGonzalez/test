@@ -3,6 +3,8 @@ export interface ITask {
   title: string;
   description: string;
   state: string;
+  createdAt: Date;
+  user: string;
 }
 
 export interface ITasks {
@@ -16,4 +18,10 @@ export const INITIAL_TASK_STATE: ITasks = {
 export interface filterTaskProps {
   task: ITask;
   onChange(type: string, value: string): void
+}
+
+export enum STATES {
+  PENDING = 'Pending',
+  IN_PROGRESS = 'In Progress',
+  COMPLETED = 'Completed',
 }

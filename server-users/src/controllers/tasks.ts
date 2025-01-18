@@ -1,14 +1,21 @@
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
-import { ITask } from '../interfaces/task';
-import { openMongoConnection, closeMongoConnection } from '../db/config'
+import {
+  openMongoConnection,
+  closeMongoConnection,
+  autorization
+} from '../db/config'
+import { getUserEmail } from './users';
 
 export const getAll = async (req: Request, res: Response) => {
   let tasks: any;
+  const { email } = req.params;
   try {
     await openMongoConnection();
+    const user = await getUserEmail(email);
+    await autorization(req.headers.authorization || '');
     var modelTask = mongoose.model('task');
-    tasks = await modelTask.find();
+    tasks = await modelTask.find({user: user._id.toString()});
   } catch (error) {
     tasks = {error}
   } finally {
@@ -22,6 +29,7 @@ export const getTask = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     await openMongoConnection();
+    await autorization(req.headers.authorization || '');
     var modelTask = mongoose.model('task');
     task = await modelTask.findById(id);
   } catch (error) {
@@ -35,11 +43,18 @@ export const getTask = async (req: Request, res: Response) => {
 export const putTask = async (req: Request, res: Response) => {
   let task: any;
   try {
-    const { title, description, state } = req.body;
+    const { title, description, email } = req.body;
+    const user = await getUserEmail(email);
+    const date = new Date();
     await openMongoConnection();
+    await autorization(req.headers.authorization || '');
     var modelTask = mongoose.model('task');
     task = await modelTask.insertMany({
-      title, description, state
+      title,
+      description,
+      state: 'Pending',
+      user: user._id.toString(),
+      createdAt: date
     });
   } catch (error) {
     task = {error}
@@ -55,6 +70,7 @@ export const deleteTask = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     await openMongoConnection();
+    await autorization(req.headers.authorization || '');
     var modelTask = mongoose.model('task');
     task = await modelTask.deleteOne({
       _id: id
@@ -72,7 +88,7 @@ export const updateTask = async (req: Request, res: Response) => {
   let task: any;
   try {
     const { id } = req.params;
-    const { title, description, state } = req.body;
+    const { title, description } = req.body;
     await openMongoConnection();
     var modelTask = mongoose.model('task');
     task = await modelTask.updateOne(
@@ -81,8 +97,7 @@ export const updateTask = async (req: Request, res: Response) => {
       },
       {
         title,
-        description,
-        state
+        description
       });
   } catch (error) {
     task = {error}

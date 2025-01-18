@@ -1,18 +1,46 @@
+.header-menu {
+	padding-bottom: 10px;
+}
+
 .header-container {
 	display: -ms-flex;
 	display: -webkit-flex;
 	display: flex;
-  width: 700px;
+  width: 770px;
+	margin-left: 12px;
 }
 
 .header-container > div {
-	width: 50%;
+	width: 20%;
 	padding-top: 30px;
   text-align: right;
   align-items:end;
 }
 
-.header-container > div:first-child {
-	width: 50%;
+.header-container > div.header-title {
+	width: 75%;
   text-align: left;
+}
+
+.header-container > div.header-icon-add {
+	margin-right: 30px;
+	width: 30px;
+  text-align:center;
+	align-items: end;
+	align-self: flex-end;
+	padding-bottom: 25px;
+}
+
+.header-icon-add {
+	&:hover {
+		color: #9b9b9b;
+	}
+}
+.user-email {
+	text-align: right;
+	padding-right: 35px;
+	padding-bottom: 10px;
+	font-size: small;
+	color: #9b9b9b;
+	font-weight: 700;
 }

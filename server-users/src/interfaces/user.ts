@@ -1,10 +1,17 @@
-export interface IUsers {
-  users: IUser[];
-  isFetching: boolean;
+import { Model } from 'mongoose';
+
+import {
+  IBaseObject,
+} from './base';
+
+export interface IUser extends IBaseObject {
+  name: string;
+  email: string;
+  createdAt: Date;
 }
 
-export interface IUser {
-  id?: number;
-  email: string;
-  name: string;
+export interface IUserDocument extends IUser {
+  getAll(): Promise<IUserDocument>;
 }
+
+export interface IUserModel extends Model<IUserDocument> {}

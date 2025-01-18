@@ -1,0 +1,43 @@
+.div-modal {
+  margin-top: 18%;
+  margin-left: 35%;
+  width: 380px;
+  background-color: #ffffff;
+  color: #57545c;
+  border-radius: 6px;
+  box-shadow: 0.8px 0.8px #e3e3e3;
+  border: 0.1em solid #e3e3e3;
+  padding-bottom: 20px;
+}
+
+.title-modal {
+  padding: 8px;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 700;
+  div {
+    padding-bottom: 20px;
+    font-size: 13px;
+    font-weight: 400;
+  }
+}
+
+.open-task {
+  text-align: center;
+  margin-top: 18%;
+  margin-left: 35%;
+  width: 425px;
+  background-color: #ffffff;
+  color: #2d2d2d;
+  border-radius: 6px;
+  box-shadow: 0.8px 0.8px #e3e3e3;
+  border: 0.1em solid #e3e3e3;
+  padding: 0px 25px 20px 25px;
+}
+
+.title-open-task {
+  padding: 8px;
+  font-size: 22px;
+  text-align: center;
+  font-weight: 600;
+}

@@ -1,11 +1,11 @@
-import mongoose, { Schema } from 'mongoose';
-import { ITaskDocument, ITaskModel } from '../../../interfaces/task'
+import { Schema } from 'mongoose';
+import { ITaskDocument } from '../../../interfaces/task'
 
 export const taskSchema = new Schema<ITaskDocument>(
   {
     title: {
       type: String,
-      required: false,
+      required: true,
     },
     description: {
       type: String,
@@ -15,7 +15,13 @@ export const taskSchema = new Schema<ITaskDocument>(
       type: String,
       required: true,
     },
+    user: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      required: true,
+    },
   }
 );
-
-export const connection = mongoose.createConnection();

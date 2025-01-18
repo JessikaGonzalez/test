@@ -1,41 +1,56 @@
 import { useState } from 'react';
-import { Navigate } from 'react-router';
-import { CardHeader, Button, Divider } from '@mui/material'
 import Cookies from 'js-cookie';
+import { CardHeader, Divider, Button } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add';
+import Tooltip from '@mui/material/Tooltip';
 
-import { useAppDispatch } from '../../utils/hooks.ts';
-import { setLogOut } from '../../actions/user.ts'
-import Menu from '../Menu'
+import Search from '../../components/Search'
+import TaskModal from '../TaskModal';
+import MenuHeader from '../Menu'
+import { addTask } from '../../controllers/tasks';
 import './style.scss'
 
-const Header = ({ title }: any) => {
+const email = Cookies.get('email')
 
-  const dispatch = useAppDispatch();
+const Header = ({ title, titleSearch, handleUpdate, type }: any) => {
 
-  const [shouldRedirect, setShouldRedirect] = useState(false);
+  const [openTaskModal, setOpenTaskModal] = useState(false);
 
-  const logOutClick = async (shouldRedirect: boolean) => {
-    dispatch(setLogOut())
-    setShouldRedirect(!shouldRedirect);
-    Cookies.remove('email')
-  }
+  const handleOpenTaskModal = () => {
+    setOpenTaskModal(true);
+  };
+
+  const handleCloseTaskModal = () => {
+    setOpenTaskModal(false);
+  };
+
+  const handleSaveTask = async (title: string, description: string) => {
+    await addTask(title, description, (email || ''));
+    setOpenTaskModal(false);
+    handleUpdate('')
+  };
 
   return (
     <>
-      <div><Menu /></div>
+      <div className='header-menu'>
+        <MenuHeader />
+      </div>
+      <div className='user-email'>{email}</div>
       <Divider />
       <div className="header-container">
-        <div><CardHeader title={title}></CardHeader></div>
-        <div>
-          <Button
-            variant="contained"
-            onClick={() => logOutClick(shouldRedirect)}
-          >
-            Log Out
-          </Button>
-          {shouldRedirect && <Navigate replace to="/" />}
-        </div>
+        <div className='header-title'><CardHeader title={title}></CardHeader></div>
+        {type === 'task' && (
+          <div className='header-icon-add'>
+            <Tooltip title="Add a New Task">
+              <Button onClick={handleOpenTaskModal}>
+                <AddIcon />
+              </Button>
+            </Tooltip>
+          </div>
+        )}
+        <Search onChange={handleUpdate} title={titleSearch} />
       </div>
+      <TaskModal handleSaveTask={handleSaveTask} openTaskModal={openTaskModal} handleCloseTaskModal={handleCloseTaskModal} />
     </>
   );
 }

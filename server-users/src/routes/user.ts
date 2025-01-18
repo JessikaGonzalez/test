@@ -1,9 +1,13 @@
-import express, { Request, Response, Router } from 'express';
+import express, { Router } from 'express';
 
-import { getAll, getUser } from '../controllers/users'
+import { getAll, addUser, getTokenUser } from '../controllers/users'
 
 const router: Router = express.Router();
 
 router.get('/api/users/', getAll)
+
+router.get('/api/user/:email', getTokenUser)
+
+router.post('/api/user/:name/:email', addUser)
 
 export default router;
